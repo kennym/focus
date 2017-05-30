@@ -1,22 +1,38 @@
-import React from 'react'
+import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 
-const Dashboard = props => (
-  <div>Hello {props.name}!</div>
-)
+import Goal from "./goal"
+import NewGoalInput from "./new_goal_input"
 
-Dashboard.defaultProps = {
-  name: 'David'
-}
+class Dashboard extends Component {
+  constructor(props) {
+    super(props);
+  }
 
-Dashboard.propTypes = {
-  name: PropTypes.string
+  render() {
+    const goals = []
+    const titles = ["Test #1", "Test #2"]
+
+    for (var title of titles) {
+      goals.push(<Goal key={title} title={title} />)
+    }
+
+    return (
+      <div id="dashboard">
+        <ul>
+          { goals }
+        </ul>
+
+        <NewGoalInput />
+      </div>
+    )
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <Dashboard name="React" />,
+    <Dashboard />,
     document.body.appendChild(document.createElement('div')),
   )
 })
